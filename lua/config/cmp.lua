@@ -49,24 +49,6 @@ cmp.setup({
 				nvim_lua = "[Lua]",
 				copilot = "[Copilot]",
 			},
-			before = function(entry, vim_item)
-				-- Get the full snippet (and only keep first line)
-				local word = entry:get_insert_text()
-				if entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet then
-					word = vim.lsp.util.parse_snippet(word)
-				end
-				word = str.oneline(word)
-
-				if
-					entry.completion_item.insertTextFormat == types.lsp.InsertTextFormat.Snippet
-					and string.sub(vim_item.abbr, -1, -1) == "~"
-				then
-					word = word .. "~"
-				end
-				vim_item.abbr = word
-
-				return vim_item
-			end,
 			symbol_map = { Copilot = "" },
 		}),
 	},
@@ -85,14 +67,14 @@ cmp.setup({
 			select = false,
 		}),
 	},
-	snippet = {
-		expand = function(args) end,
-	},
+	-- snippet = {
+	-- 	expand = function(args) end,
+	-- },
 
 	sources = cmp.config.sources({
 		{ name = "copilot" },
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
+		-- { name = "luasnip" },
 		{ name = "buffer" },
 		{ name = "path" },
 		{ name = "emoji" },

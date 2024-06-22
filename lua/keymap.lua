@@ -87,9 +87,6 @@ nmap("<leader>8", ":BufferLineGoToBuffer 8 <CR>")
 nmap("<leader>9", ":BufferLineGoToBuffer 9 <CR>")
 nmap("<leader>0", ":BufferLineGoToBuffer 0 <CR>")
 --- }}}
---{{{ Trouble
-nmap("<leader>tb", ":TroubleToggle <CR>")
---}}}
 --{{{ TODOList
 nmap("<leader>td", ":TodoTelescope <CR>")
 --}}}
@@ -98,36 +95,20 @@ nmap("<leader>ff", ":Telescope find_files <CR>")
 nmap("<leader>fg", ":Telescope grep_string theme=cursor <CR>")
 nmap("<leader>fs", ":Telescope live_grep<CR>")
 nmap("<leader>tm", ":Telescope colorscheme theme=cursor <CR>")
-nmap("<leader>fb", ":Telescope file_browser theme=ivy <CR>")
-nmap("<leader>mp", ":Telescope keymaps theme=dropdown <CR>")
 -- }}}
---{{{telescope for lsp
-nmap("<leader>dff", ":Telescope lsp_definitions <CR>")
-nmap("<leader>dft", ":Telescope lsp_type_definitions <CR>")
-nmap("<leader>re", ":Telescope lsp_references <CR>")
-nmap("<leader>ca", ":lua vim.lsp.buf.code_action() <CR>")
--- }}}
---{{{ telescope for git
-nmap("<leader>gs", ":Telescope git_status <CR>")
-nmap("<leader>gb", ":Telescope git_branches theme=cursor<CR>")
-nmap("<leader>gc", ":Telescope git_commits <CR>")
-nmap("<leader>gt", ":Telescope git_bcommits <CR>")
+-- {{{ Lspsaga
+nmap("<leader>tb", ":Lspsaga show_workspace_diagnostics<CR>")
+nmap("<leader>hh", ":Lspsaga hover_doc <CR>") -- help information
+nmap("<leader>rn", ":Lspsaga rename <CR>") -- rename
+nmap("<leader>ol", ":Lspsaga outline <CR>") -- outline
+nmap("<leader>dfp", ":Lspsaga peek_definition <CR>") -- peek define
+nmap("<leader>dfg", ":Lspsaga goto_definition <CR>") -- goto define
+nmap("<leader>fd", ":Lspsaga finder <CR>") -- finder
 --}}}
 --{{{ NvimTree
 nmap("<leader>ft", ":NvimTreeToggle <CR>")
 --}}}
--- {{{ Lspsaga
--- help information
-nmap("<leader>hh", ":Lspsaga hover_doc <CR>")
--- rename
-nmap("<leader>rn", ":Lspsaga rename <CR>")
---}}}
 -- {{{gitsigns
 nmap("<leader>dd", ":Gitsigns diffthis <CR>")
 -- }}}
---{{{
-nmap("<leader>np", "<cmd>AerialNavToggle<CR>")
-nmap("<leader>pp", "<cmd>AerialPrev<CR>")
-nmap("<leader>nn", "<cmd>AerialNext<CR>")
---}}}
 return M

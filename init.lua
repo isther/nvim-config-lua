@@ -1,8 +1,8 @@
-local fn = vim.fn
+local vim = vim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-	fn.system({
+	vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
@@ -11,10 +11,9 @@ if not vim.loop.fs_stat(lazypath) then
 		lazypath,
 	})
 end
-
 vim.opt.rtp:prepend(lazypath)
 
--- load all pack
+-- load all plugins
 require("plugins")
 
 -- key map
@@ -25,3 +24,10 @@ require("options")
 
 -- config
 require("config")
+
+local async = require("plenary.async")
+local notify = require("notify").async
+
+async.run(function()
+	notify("👿 Hi ther, just do IT!")
+end)

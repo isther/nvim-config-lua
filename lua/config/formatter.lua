@@ -11,6 +11,32 @@ local function c_cpp_format()
 	}
 end
 
+local function prettier(parser)
+	if not parser then
+		return {
+			exe = "prettier",
+			args = {
+				"--stdin-filepath",
+				util.escape_path(util.get_current_buffer_file_path()),
+			},
+			stdin = true,
+			try_node_modules = true,
+		}
+	end
+
+	return {
+		exe = "prettier",
+		args = {
+			"--stdin-filepath",
+			util.escape_path(util.get_current_buffer_file_path()),
+			"--parser",
+			parser,
+		},
+		stdin = true,
+		try_node_modules = true,
+	}
+end
+
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 require("formatter").setup({
 	-- Enable or disable logging
@@ -73,15 +99,20 @@ require("formatter").setup({
 				}
 			end,
 		},
+		toml = {
+			function()
+				return {
+					exe = "taplo",
+					args = { "fmt", "-" },
+					stdin = true,
+					try_node_modules = true,
+				}
+			end,
+		},
 
 		c = c_cpp_format,
 		cpp = c_cpp_format,
 
-		["*"] = {
-			-- function()
-			-- vim.lsp.buf.format({ timeout_ms = 2000 }),
-			-- end,
-			require("formatter.filetypes.any").remove_trailing_whitespace,
-		},
+		["*"] = prettier,
 	},
 })

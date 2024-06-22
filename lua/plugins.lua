@@ -2,26 +2,14 @@ require("lazy").setup({
 	--{{{ Lsp
 	{
 		"williamboman/mason.nvim",
-		dependencies = {
-			"williamboman/mason-lspconfig.nvim",
-			"neovim/nvim-lspconfig",
-		},
+		"williamboman/mason-lspconfig.nvim",
+		"neovim/nvim-lspconfig",
 	},
 	{
 		"nvim-tree/nvim-tree.lua",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
 		},
-		tag = "nightly", -- optional, updated every week. (see issue #1193)
-	},
-	{
-		"akinsho/flutter-tools.nvim",
-		lazy = false,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"stevearc/dressing.nvim", -- optional for vim.ui.select
-		},
-		config = true,
 	},
 	--}}}
 	--{{{ Formmat
@@ -34,17 +22,6 @@ require("lazy").setup({
 		config = function()
 			require("nvim_comment").setup({})
 		end,
-	},
-	-- }}}
-	-- {{{ Outline
-	{
-		"stevearc/aerial.nvim",
-		opts = {},
-		-- Optional dependencies
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-tree/nvim-web-devicons",
-		},
 	},
 	-- }}}
 	-- {{{ Theme
@@ -93,13 +70,6 @@ require("lazy").setup({
 		main = "ibl",
 		opts = {},
 	},
-	{
-		"folke/trouble.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("trouble").setup({})
-		end,
-	},
 	{ "lewis6991/gitsigns.nvim", dependencies = { "nvim-lua/plenary.nvim" } }, -- Git signature
 	{
 		"akinsho/toggleterm.nvim",
@@ -135,7 +105,14 @@ require("lazy").setup({
 		},
 	},
 	"onsails/lspkind-nvim",
-	"tami5/lspsaga.nvim",
+	{
+		"nvimdev/lspsaga.nvim",
+		after = "nvim-lspconfig",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter", -- optional
+			"nvim-tree/nvim-web-devicons", -- optional
+		},
+	},
 	{
 		"windwp/nvim-autopairs",
 		config = function()
@@ -143,11 +120,46 @@ require("lazy").setup({
 		end,
 	},
 	-- }}}
+	-- {{{ LeetCode
+	{
+		"kawre/leetcode.nvim",
+		build = ":TSUpdate html",
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim", -- telescope 所需
+			"MunifTanjim/nui.nvim",
+
+			-- 可选
+			"nvim-treesitter/nvim-treesitter",
+			"rcarriga/nvim-notify",
+			"nvim-tree/nvim-web-devicons",
+		},
+		opts = {
+			lang = "golang",
+			cn = {
+				enabled = true,
+			},
+			image_support = false,
+			injector = { ---@type table<lc.lang, lc.inject>
+				["cpp"] = {
+					before = {
+						"#include <bits/stdc++.h>",
+						"using namespace std;",
+					},
+					after = "int main() {}",
+				},
+				["golang"] = {
+					before = { "package leetcode" },
+				},
+			},
+		},
+	},
+	-- }}}
 	--{{{ Other
 	{
 
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.0",
+		tag = "0.1.4",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
@@ -155,14 +167,21 @@ require("lazy").setup({
 		},
 	},
 	{
+		"NStefan002/screenkey.nvim",
+		lazy = false,
+		version = "*", -- or branch = "dev", to use the latest commit
+	},
+	{
+		"rcarriga/nvim-notify",
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
+		tag = "v0.9.2",
 		run = ":TSUpdate",
 	},
 
 	"wakatime/vim-wakatime", -- wakatime plugin
 	"farmergreg/vim-lastplace", -- Last place
-	-- "rcarriga/nvim-notify",
-	-- "luukvbaal/stabilize.nvim",
-	-- "simrat39/rust-tools.nvim",
+	-- "mrcjkb/rustaceanvim",
 	--}}}
 })
