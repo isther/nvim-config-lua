@@ -182,6 +182,14 @@ require("lazy").setup({
 
 	"wakatime/vim-wakatime", -- wakatime plugin
 	"farmergreg/vim-lastplace", -- Last place
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+		ft = { "markdown" },
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
 	-- "mrcjkb/rustaceanvim",
 	--}}}
 })

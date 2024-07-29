@@ -29,6 +29,9 @@ require("lspsaga").setup({
 		separator = "  ",
 		color_mode = false,
 	},
+	outline = {
+		layout = "float",
+	},
 	implement = {
 		enable = true,
 		sign = true,

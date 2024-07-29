@@ -1,3 +1,19 @@
+-- General/Global LSP Configuration
+local api = vim.api
+local lsp = vim.lsp
+
+local make_client_capabilities = lsp.protocol.make_client_capabilities
+function lsp.protocol.make_client_capabilities()
+	local caps = make_client_capabilities()
+	if not (caps.workspace or {}).didChangeWatchedFiles then
+		vim.notify("lsp capability didChangeWatchedFiles is already disabled", vim.log.levels.WARN)
+	else
+		caps.workspace.didChangeWatchedFiles = nil
+	end
+
+	return caps
+end
+
 require("mason").setup()
 
 require("mason-lspconfig").setup({
@@ -7,7 +23,10 @@ require("mason-lspconfig").setup({
 local lspconfig = require("lspconfig")
 
 lspconfig.lua_ls.setup({})
-lspconfig.gopls.setup({})
+lspconfig.gopls.setup({
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_dir = require("lspconfig").util.root_pattern("go.work", "go.mod", ".git"),
+})
 lspconfig.golangci_lint_ls.setup({})
 lspconfig.cmake.setup({})
 lspconfig.clangd.setup({})

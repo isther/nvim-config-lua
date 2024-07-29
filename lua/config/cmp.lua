@@ -5,10 +5,9 @@ local str = require("cmp.utils.str")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 require("copilot").setup({
-	suggestion = { enabled = false },
+	suggestion = { enabled = true },
 	panel = { enabled = false },
 })
-
 -- gray
 vim.cmd([[highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080]])
 
