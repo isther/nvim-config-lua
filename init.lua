@@ -15,7 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 if vim.g.neovide then
 	vim.print(vim.g.neovide_version)
-	vim.o.guifont = "Iosevka Nerd Font:h24:i:b"
+	vim.o.guifont = "Iosevka Nerd Font:h18:i:b"
 end
 
 -- load all plugins

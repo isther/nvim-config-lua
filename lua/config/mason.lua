@@ -17,7 +17,7 @@ end
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "gopls", "clangd", "cmake", "rust_analyzer", "tsserver" },
+	ensure_installed = { "lua_ls", "gopls", "clangd", "cmake", "rust_analyzer", "ts_ls" },
 })
 
 local lspconfig = require("lspconfig")
@@ -57,6 +57,8 @@ require("lspconfig").cssls.setup({
 })
 --}}}
 
-lspconfig.tsserver.setup({})
+lspconfig.ts_ls.setup({})
 lspconfig.taplo.setup({})
 lspconfig.volar.setup({})
+
+lspconfig.solidity_ls.setup({})

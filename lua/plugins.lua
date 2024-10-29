@@ -6,6 +6,12 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 	},
 	{
+		"j-hui/fidget.nvim",
+		opts = {
+			-- options
+		},
+	},
+	{
 		"nvim-tree/nvim-tree.lua",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons", -- optional, for file icons
@@ -106,12 +112,31 @@ require("lazy").setup({
 	},
 	"onsails/lspkind-nvim",
 	{
-		"nvimdev/lspsaga.nvim",
-		after = "nvim-lspconfig",
+		"neovim/nvim-lspconfig",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter", -- optional
-			"nvim-tree/nvim-web-devicons", -- optional
+			{
+				"SmiteshP/nvim-navbuddy",
+				dependencies = {
+					"SmiteshP/nvim-navic",
+					"MunifTanjim/nui.nvim",
+				},
+				opts = { lsp = { auto_attach = true } },
+			},
 		},
+	},
+	{
+		"jinzhongjia/LspUI.nvim",
+		branch = "main",
+		config = function()
+			require("LspUI").setup({
+				-- config options go here
+			})
+		end,
+	},
+	{
+		"rmagatti/goto-preview",
+		event = "BufEnter",
+		config = true, -- necessary as per https://github.com/rmagatti/goto-preview/issues/88
 	},
 	{
 		"windwp/nvim-autopairs",

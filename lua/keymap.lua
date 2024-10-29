@@ -90,21 +90,20 @@ nmap("<leader>0", ":BufferLineGoToBuffer 0 <CR>")
 --{{{ TODOList
 nmap("<leader>td", ":TodoTelescope <CR>")
 --}}}
+-- {{{ Lsp utils
+nmap("<leader>rn", ":LspUI rename <CR>")
+nmap("<leader>tb", ":Telescope diagnostics <CR>")
+nmap("<leader>ol", ":Navbuddy <CR>")
+nmap("<leader>dfg", ":Telescope lsp_definitions<CR>")
+nmap("<leader>dfp", "<cmd>lua require('goto-preview').goto_preview_definition() <CR>")
+nmap("<leader>fd", ":Telescope lsp_references <CR>")
+-- }}}
 -- {{{telescope
 nmap("<leader>ff", ":Telescope find_files <CR>")
 nmap("<leader>fg", ":Telescope grep_string theme=cursor <CR>")
 nmap("<leader>fs", ":Telescope live_grep<CR>")
 nmap("<leader>tm", ":Telescope colorscheme theme=cursor <CR>")
 -- }}}
--- {{{ Lspsaga
-nmap("<leader>tb", ":Lspsaga show_workspace_diagnostics<CR>")
-nmap("<leader>hh", ":Lspsaga hover_doc <CR>") -- help information
-nmap("<leader>rn", ":Lspsaga rename <CR>") -- rename
-nmap("<leader>ol", ":Lspsaga outline <CR>") -- outline
-nmap("<leader>dfp", ":Lspsaga peek_definition <CR>") -- peek define
-nmap("<leader>dfg", ":Lspsaga goto_definition <CR>") -- goto define
-nmap("<leader>fd", ":Lspsaga finder <CR>") -- finder
---}}}
 --{{{ NvimTree
 nmap("<leader>ft", ":NvimTreeToggle <CR>")
 --}}}

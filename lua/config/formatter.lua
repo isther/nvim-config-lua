@@ -11,32 +11,6 @@ local function c_cpp_format()
 	}
 end
 
-local function prettier(parser)
-	if not parser then
-		return {
-			exe = "prettier",
-			args = {
-				"--stdin-filepath",
-				util.escape_path(util.get_current_buffer_file_path()),
-			},
-			stdin = true,
-			try_node_modules = true,
-		}
-	end
-
-	return {
-		exe = "prettier",
-		args = {
-			"--stdin-filepath",
-			util.escape_path(util.get_current_buffer_file_path()),
-			"--parser",
-			parser,
-		},
-		stdin = true,
-		try_node_modules = true,
-	}
-end
-
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 require("formatter").setup({
 	-- Enable or disable logging
@@ -109,10 +83,29 @@ require("formatter").setup({
 				}
 			end,
 		},
+		yaml = {
+			function()
+				return {
+					exe = "prettier",
+					args = { "--parser", "yaml" },
+					stdin = true,
+				}
+			end,
+		},
 
 		c = c_cpp_format,
 		cpp = c_cpp_format,
 
-		["*"] = prettier,
+		solidity = function()
+			return {
+				exe = "forge",
+				args = { "fmt", "--raw", "-" },
+				stdin = true,
+			}
+		end,
+
+		["*"] = {
+			require("formatter.filetypes.any").remove_trailing_whitespace,
+		},
 	},
 })
