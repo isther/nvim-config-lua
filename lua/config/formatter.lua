@@ -104,6 +104,14 @@ require("formatter").setup({
 			}
 		end,
 
+		cmake = function()
+			return {
+				exe = "cmake-format",
+				args = { "-" },
+				stdin = true,
+			}
+		end,
+
 		["*"] = {
 			require("formatter.filetypes.any").remove_trailing_whitespace,
 		},

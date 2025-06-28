@@ -100,16 +100,6 @@ require("lazy").setup({
 		-- install jsregexp (optional!).
 		build = "make install_jsregexp",
 	},
-	{
-		"zbirenbaum/copilot.lua",
-		{
-			"zbirenbaum/copilot-cmp",
-			after = { "copilot.lua" },
-			config = function()
-				require("copilot_cmp").setup()
-			end,
-		},
-	},
 	"onsails/lspkind-nvim",
 	{
 		"neovim/nvim-lspconfig",
@@ -145,46 +135,11 @@ require("lazy").setup({
 		end,
 	},
 	-- }}}
-	-- {{{ LeetCode
-	{
-		"kawre/leetcode.nvim",
-		build = ":TSUpdate html",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim", -- telescope 所需
-			"MunifTanjim/nui.nvim",
-
-			-- 可选
-			"nvim-treesitter/nvim-treesitter",
-			"rcarriga/nvim-notify",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {
-			lang = "golang",
-			cn = {
-				enabled = true,
-			},
-			image_support = false,
-			injector = { ---@type table<lc.lang, lc.inject>
-				["cpp"] = {
-					before = {
-						"#include <bits/stdc++.h>",
-						"using namespace std;",
-					},
-					after = "int main() {}",
-				},
-				["golang"] = {
-					before = { "package leetcode" },
-				},
-			},
-		},
-	},
-	-- }}}
 	--{{{ Other
 	{
 
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.4",
+		tag = "0.1.8",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
@@ -201,8 +156,9 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		tag = "v0.9.2",
-		run = ":TSUpdate",
+		branch = "master",
+		lazy = false,
+		build = ":TSUpdate",
 	},
 
 	"wakatime/vim-wakatime", -- wakatime plugin
@@ -214,6 +170,15 @@ require("lazy").setup({
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
+	},
+	{
+		"hat0uma/csvview.nvim",
+		---@module "csvview"
+		---@type CsvView.Options
+		opts = {
+			parser = { comments = { "#", "//" } },
+		},
+		cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
 	},
 	-- "mrcjkb/rustaceanvim",
 	--}}}

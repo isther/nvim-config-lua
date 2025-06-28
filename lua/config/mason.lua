@@ -61,4 +61,4 @@ lspconfig.ts_ls.setup({})
 lspconfig.taplo.setup({})
 lspconfig.volar.setup({})
 
-lspconfig.solidity_ls.setup({})
+require("lspconfig").solidity_ls.setup({})

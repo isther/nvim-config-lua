@@ -4,10 +4,6 @@ local types = require("cmp.types")
 local str = require("cmp.utils.str")
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
-require("copilot").setup({
-	suggestion = { enabled = true },
-	panel = { enabled = false },
-})
 -- gray
 vim.cmd([[highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080]])
 
@@ -46,9 +42,7 @@ cmp.setup({
 				nvim_lsp = "[LSP]",
 				lua_snip = "[LuaSnip]",
 				nvim_lua = "[Lua]",
-				copilot = "[Copilot]",
 			},
-			symbol_map = { Copilot = "" },
 		}),
 	},
 	window = {
@@ -71,7 +65,6 @@ cmp.setup({
 	-- },
 
 	sources = cmp.config.sources({
-		{ name = "copilot" },
 		{ name = "nvim_lsp" },
 		-- { name = "luasnip" },
 		{ name = "buffer" },

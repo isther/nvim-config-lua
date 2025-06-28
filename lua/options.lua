@@ -43,9 +43,10 @@ o.clipboard = "unnamedplus" -- install xsel or xclip
 
 vim.wo.fillchars = "eob: "
 
-vim.cmd("colorscheme catppuccin-mocha")
+vim.cmd("colorscheme catppuccin-frappe")
 
 vim.cmd("set foldmethod=expr")
 vim.cmd("set foldexpr=nvim_treesitter#foldexpr()")
 vim.cmd("set nofoldenable")
 vim.cmd("set foldlevel=0")
+vim.cmd("set nowrap")
